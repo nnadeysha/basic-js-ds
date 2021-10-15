@@ -58,9 +58,8 @@ this.treeNew = null;
     
   }
 
-  remove(/* data */) {
-    //throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  remove( data) {
+    this.treeNew = this.deleteNodeHelper(this.treeNew, data)
   }
 
   min() {
@@ -72,5 +71,38 @@ this.treeNew = null;
     //throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
   }
+
+   deleteNodeHelper(treeNew, data) {
+    if (treeNew === null) {
+       return null;
+    }
+    if (data < treeNew.data) {
+      treeNew.left = this.deleteNodeHelper(treeNew.left, data);
+       return treeNew;
+    } else if (data > treeNew.data) {
+      treeNew.right = this.deleteNodeHelper(treeNew.right, data);
+       return treeNew;
+    } else {
+       // No children
+       //case 1 - a leaf node
+       if (treeNew.left === null && treeNew.right === null) {
+        treeNew = null;
+          return treeNew;
+       }
+       // Single Child cases
+       if (treeNew.left === null) return treeNew.right;
+       if (treeNew.right === null) return treeNew.left;
+ 
+       // Both children, so need to find successor
+       let currentNode = treeNew.right;
+       while (currentNode.left !== null) {
+          currentNode = currentNode.left;
+       }
+       treeNew.data = currentNode.data;
+       // Delete the value from right subtree.
+       treeNew.right = this.deleteNodeHelper(treeNew.right, currentNode.data);
+       return treeNew;
+    }
+ }
 
 }
