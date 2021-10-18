@@ -1,6 +1,6 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError } = require("../extensions/index.js");
 
-const { ListNode } = require('../extensions/list-node.js');
+const { ListNode } = require("../extensions/list-node.js");
 
 /**
  * Implement the Queue with a given interface via linked list (use ListNode extension above).
@@ -14,34 +14,26 @@ const { ListNode } = require('../extensions/list-node.js');
  * queue.getUnderlyingList() // returns { value: 3, next: null }
  */
 module.exports = class Queue {
-constructor(){
-  this.items = []
-}
- 
-   
-  
+  constructor() {
+    this.items = [];
+  }
 
-enqueue (item) {
-  this.items.push(item)
-}
+  enqueue(item) {
+    this.items.push(item);
+  }
 
+  dequeue() {
+    return this.items.shift();
+  }
 
-dequeue ()  {
- return  this.items.shift()
-}
-
-getUnderlyingList(items){
- 
- let list = null;
- for(let i = this.items.length - 1; i >= 0; i--){
-   
-   list = {
-    value: this.items[i],
-     next: list
-   }
- }
- return list 
-}
-}
-
-
+  getUnderlyingList(items) {
+    let list = null;
+    for (let i = this.items.length - 1; i >= 0; i--) {
+      list = {
+        value: this.items[i],
+        next: list,
+      };
+    }
+    return list;
+  }
+};
