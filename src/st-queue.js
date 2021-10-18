@@ -17,9 +17,7 @@ module.exports = class Queue {
 constructor(){
   this.items = []
 }
- getUnderlyingList(){
-  return this.items
-}
+ 
    
   
 
@@ -32,8 +30,18 @@ dequeue ()  {
  return  this.items.shift()
 }
 
-peek() {
-  return this.items[0]
+getUnderlyingList(items){
+ 
+ let list = null;
+ for(let i = this.items.length - 1; i >= 0; i--){
+   
+   list = {
+    value: this.items[i],
+     next: list
+   }
+ }
+ return list 
 }
 }
+
 
